@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {Store, StoreModule} from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -8,7 +9,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SharedModule} from './shared/shared.module';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
-import {shoppingListReducer} from './shopping-list/store/shopping-list.reducer';
+import * as fromApp from './store/app.reducer';
+import {AuthEffects} from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import {shoppingListReducer} from './shopping-list/store/shopping-list.reducer';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    StoreModule.forRoot(fromApp.appReducers),
+    EffectsModule.forRoot([AuthEffects]),
     // CoreModule
   ],
   providers: [{
