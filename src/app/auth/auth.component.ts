@@ -42,10 +42,10 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     if (this.isLoginMode) {
       // authObs = this.authService.login(email, password);
-      this.store.dispatch(new AuthActions.LoginStart({email, password}));
+      this.store.dispatch(AuthActions.loginStart({email, password}));
     } else {
       // authObs = this.authService.signup(email, password);
-      this.store.dispatch(new AuthActions.SignUpStart({email, password}));
+      this.store.dispatch(AuthActions.signupStart({email, password}));
     }
 
     // authObs.subscribe(resData => {
@@ -62,7 +62,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   onHandleError() {
-    this.store.dispatch(new AuthActions.ClearError());
+    this.store.dispatch(AuthActions.clearError());
   }
 
   private showErrorAlert(message: string) {

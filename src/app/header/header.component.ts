@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
+import * as RecipeActions from '../recipes/store/recipe.actions';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -21,12 +22,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private store: Store<fromApp.AppState>) {}
   onSaveData() {
-    this.dataStorageService.storeRecipes();
+    // this.dataStorageService.storeRecipes();
+    this.store.dispatch(RecipeActions.storeRecipes());
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe();
+    // this.dataStorageService.fetchRecipes().subscribe();
+    this.store.dispatch(RecipeActions.fetchRecipes());
   }
+
 
   ngOnInit(): void {
     this.userSub = this.store
@@ -42,7 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.store.dispatch(new AuthActions.Logout());
+    this.store.dispatch(AuthActions.logout());
 
   }
 }

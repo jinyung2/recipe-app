@@ -13,6 +13,8 @@ import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import * as fromApp from './store/app.reducer';
 import {AuthEffects} from './auth/store/auth.effects';
 import {environment} from '../environments/environment';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
+import {RecipeEffects} from './recipes/store/recipe.effects';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,14 @@ import {environment} from '../environments/environment';
     HeaderComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
     StoreModule.forRoot(fromApp.appReducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     StoreDevtoolsModule.instrument({logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot(),
     // CoreModule
   ],
   providers: [{
