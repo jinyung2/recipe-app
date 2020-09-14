@@ -1,5 +1,13 @@
-import {Action} from '@ngrx/store';
-import {createAction, props} from '@ngrx/store';
+import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+
+export const loginStart = createAction('[Auth] Login Start', props<{ email: string; password: string }>());
+export const signupStart = createAction('[Auth] Signup Start', props<{ email: string; password: string }>());
+export const authenticateSuccess = createAction('[Auth] Authenticate Success', props<{ email: string; userId: string; token: string; expirationDate: Date; redirect: boolean }>());
+export const authenticateFail = createAction('[Auth] Authenticate Fail', props<{ errorMessage: string }>());
+export const clearError = createAction('[Auth] Clear Error');
+export const autoLogin = createAction('[Auth] Auto Login');
+export const logout = createAction('[Auth] Logout');
 
 // export const LOGIN_START = '[Auth] Login Start';
 // export const AUTHENTICATE_SUCCESS = '[Auth] Login';
@@ -48,14 +56,6 @@ import {createAction, props} from '@ngrx/store';
 // export class AutoLogin implements Action {
 //   readonly type = AUTO_LOGIN;
 // }
-
-export const loginStart = createAction('[Auth] Login Start', props<{ email: string; password: string }>());
-export const signupStart = createAction('[Auth] Signup Start', props<{ email: string; password: string }>());
-export const authenticateSuccess = createAction('[Auth] Authenticate Success', props<{ email: string; userId: string; token: string; expirationDate: Date; redirect: boolean }>());
-export const authenticateFail = createAction('[Auth] Authenticate Fail', props<{ errorMessage: string }>());
-export const clearError = createAction('[Auth] Clear Error');
-export const autoLogin = createAction('[Auth] Auto Login');
-export const logout = createAction('[Auth] Logout');
 
 // export type AuthActions =
 //   AuthenticateFail |

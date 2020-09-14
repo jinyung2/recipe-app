@@ -1,12 +1,12 @@
-import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {AuthResponseData, AuthService} from './auth.service';
-import {Observable, Subscription} from 'rxjs';
-import {Router} from '@angular/router';
-import {AlertComponent} from '../shared/alert/alert.component';
-import {PlaceholderDirective} from '../shared/placeholder/placeholder.direcive';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthResponseData, AuthService } from './auth.service';
+import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { PlaceholderDirective } from '../shared/placeholder/placeholder.direcive';
 import * as fromApp from '../store/app.reducer';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as AuthActions from './store/auth.actions';
 
 @Component({
@@ -23,9 +23,10 @@ export class AuthComponent implements OnInit, OnDestroy {
   private closeSub: Subscription;
   private storeSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private store: Store<fromApp.AppState>) {}
+  constructor(
+    // private authService: AuthService, private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private store: Store<fromApp.AppState>) { }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -42,10 +43,10 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     if (this.isLoginMode) {
       // authObs = this.authService.login(email, password);
-      this.store.dispatch(AuthActions.loginStart({email, password}));
+      this.store.dispatch(AuthActions.loginStart({ email, password }));
     } else {
       // authObs = this.authService.signup(email, password);
-      this.store.dispatch(AuthActions.signupStart({email, password}));
+      this.store.dispatch(AuthActions.signupStart({ email, password }));
     }
 
     // authObs.subscribe(resData => {
